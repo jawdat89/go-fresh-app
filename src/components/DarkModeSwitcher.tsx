@@ -26,6 +26,7 @@ const DarkModeSwitcher: React.FC = () => {
           checked={darkSide}
           onChange={toggleDarkMode}
           size={24}
+          sunColor="var(--accent-100)"
         />
       </div>
     </>
