@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
+import DarkModeSwitcher from "./DarkModeSwitcher";
 
 const menuItems = [
   { title: "תפריט", url: "/menu" },
@@ -12,8 +13,35 @@ const menuItems = [
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent): void => {
+      // Check if the click is outside of the menuRef.current element
+      if (
+        menuRef.current &&
+        !(menuRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Attach the event listener to the document
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return (): void => {
+      // Remove the event listener on cleanup
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []); // Depend on an empty array to run the effect only once after initial
+
+  const handleToggleHambugerMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className="bg-accent-300 shadow-lg items-center min-h-[8.5vh] max-h-[8.5vh]">
+    <nav className="bg-accent-300 dark:bg-primary-darkest shadow-lg items-center min-h-[8.5vh] max-h-[8.5vh]">
       <div className="max-w-6xl mx-auto px-4 w-full">
         <div className="flex justify-between">
           {/* Logo and Title Section */}
@@ -36,16 +64,17 @@ export default function Navbar() {
                 <Link
                   key={`${item.title}-${item.url}`}
                   to={item.url}
-                  className="py-2 px-2 text-primary-darker font-semibold hover:text-secondary transition duration-300"
+                  className="py-2 px-2 text-primary-darker dark:text-primary-lightest font-semibold hover:text-secondary transition duration-300"
                 >
                   {item.title}
                 </Link>
               ))}
+              <DarkModeSwitcher />
             </div>
             {/* Hamburger Menu Button - Ensure this div is always on the left */}
             <div className="md:hidden">
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={handleToggleHambugerMenu}
                 className="text-gray-800 text-2xl"
               >
                 {isMenuOpen ? <IoCloseSharp /> : <GiHamburgerMenu />}
@@ -53,10 +82,11 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-        {/* Mobile Menu with clsx */}
+        {/* Mobile Menu */}
         <div
+          ref={menuRef}
           className={clsx(
-            "absolute z-50 top-[8.5vh] left-0 w-full bg-white shadow-lg p-4 transition-all duration-300 md:hidden",
+            "absolute z-50 top-[8.5vh] left-0 w-full bg-white dark:bg-slate-600 shadow-lg p-4 transition-all duration-300 md:hidden",
             { block: isMenuOpen, hidden: !isMenuOpen }
           )}
         >
@@ -64,11 +94,14 @@ export default function Navbar() {
             <Link
               key={`${item.title}-${item.url}`}
               to={item.url}
-              className="py-4 px-2 text-primary-darker font-semibold hover:text-secondary transition duration-300 block"
+              className="py-4 px-2 text-primary-darker dark:text-primary-lightest font-semibold hover:text-secondary transition duration-300 block"
             >
               {item.title}
             </Link>
           ))}
+          <div className="w-6 mr-5">
+            <DarkModeSwitcher />
+          </div>
         </div>
       </div>
     </nav>

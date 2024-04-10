@@ -136,8 +136,8 @@ const MenuItemsPage: React.FC = () => {
 
   return (
     <div className="flex flex-wrap">
-      <div className="w-full md:w-1/4">
-        <nav className="flex flex-col sticky top-0 z-10">
+      <div className="w-full md:w-1/4 md:bg-stone-200 md:dark:bg-stone-800 md:bg-opacity-50">
+        <nav className="flex flex-col sticky top-0">
           {categories.map((category) => (
             <button
               key={category}
@@ -145,7 +145,7 @@ const MenuItemsPage: React.FC = () => {
                 "p-2",
                 { "bg-accent-400 text-white": activeCategory === category },
                 {
-                  "text-accent-400 hover:bg-secondary-lighter hover:text-white":
+                  "text-accent-400 hover:bg-secondary-lighter hover:text-white bg-stone-200 dark:bg-stone-700 bg-opacity-50 dark:text-stone-6":
                     activeCategory !== category,
                 }
               )}
