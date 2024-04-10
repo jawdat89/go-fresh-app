@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
+
 import DarkModeSwitcher from "./DarkModeSwitcher";
+import LogoComponent from "./LogoComponent";
 
 const menuItems = [
   { title: "תפריט", url: "/menu" },
@@ -46,15 +49,7 @@ export default function Navbar() {
         <div className="flex justify-between">
           {/* Logo and Title Section */}
           <Link to="/" className="flex items-center py-2">
-            <img src="/logo.png" alt="Logo" className="h-8 w-8 flex-none" />
-            <div className="grid justify-items-stretch mr-2 flex-grow">
-              <p className="text-lg font-semibold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-primary via-stone-400 to-secondary-darker">
-                Go Fresh
-              </p>
-              <p className="text-xs text-secondary-darker justify-self-start">
-                Be Your Self
-              </p>
-            </div>
+            <LogoComponent />
           </Link>
           {/* Navigation and Hamburger Menu */}
           <div className="flex items-center space-x-4">
