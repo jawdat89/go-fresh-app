@@ -1,15 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "@/pages/home/Home";
-import MenuItems from "@/pages/menu-items/MenuItems";
-import NotFound from "@/pages/not-found/NotFound";
+import HomePage from "@/pages/home/HomePage";
+import MenuItemsPage from "@/pages/menu-items/MenuItemsPage";
+import NotFoundPage from "@/pages/not-found/NotFoundPage";
+
+import Navbar from "./components/Navbar";
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<MenuItems />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<MenuItemsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
