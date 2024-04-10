@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-lighter: #F77C50;
+  --primary: #ED5226;
+  --primary-darker: #C4461E;
+  --secondary-lighter: #A4D065;
+  --secondary: #90C843;
+  --secondary-darker: #78A82B;
+}

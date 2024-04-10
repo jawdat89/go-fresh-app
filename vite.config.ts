@@ -11,7 +11,7 @@ export default defineConfig({
       "@/components": "/src/components",
       "@/assets": "/src/assets",
       "@/pages": "/src/pages",
-      // Add more aliases as needed
+      "@/types": "/src/types",
     },
   },
 });
