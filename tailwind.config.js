@@ -29,6 +29,11 @@ export default {
         "accent-400": "#CF6344", // Example: Terracotta
         "accent-dark": "#333333", // Example: Dark Gray
       },
+      boxShadow: {
+        "custom-inner": "inset 0 200px 400px rgba(0, 0, 0, 1)",
+        "inner-primary": "inset 0 0 0 2px #f04f23",
+        "inner-secondary": "inset 0 0 0 2px #69bd45",
+      },
     },
   },
   plugins: [],

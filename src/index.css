@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --primary-lightest: "#FAD6CC";
+  --primary-lightest: #FAD6CC;
   --primary-lighter: #F3997F;
   --primary: #f04f23;
   --primary-darker: #C03F1D;

@@ -1,3 +1,5 @@
+import { PiBowlFoodFill } from "react-icons/pi";
+
 interface MenuItemProps {
   item: MenuItem;
 }
@@ -13,17 +15,24 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
       <img
         src={item.image}
         alt={item.name}
-        className="w-full h-[525px] object-cover"
+        className="w-full h-[525px] object-cover rounded-xl shadow-lg shadow-accent-300"
       />
       <div className="mt-4">
-        <h3 className="text-2xl font-semibold text-center text-secondary-darkest">
+        <h3 className="text-3xl font-semibold text-center text-secondary-darkest">
           {item.name}
         </h3>
-        <p className="text-sm">{item.description}</p>
-        <h4 className="text-sm font-semibold mt-2">רכיבים:</h4>
-        <ul className="list-disc list-inside">
+        <p className="text-md">{item.description}</p>
+        <h4 className="text-lg font-semibold mt-2">רכיבים:</h4>
+        <ul className="list-none list-inside">
           {item.recipes.map((recipe) => (
-            <li key={recipe}>{recipe}</li>
+            <li className="flex" key={recipe}>
+              <PiBowlFoodFill
+                fill="var(--primary-darker)"
+                size={18}
+                className="mt-1"
+              />{" "}
+              <span className="mr-1 text-md">{recipe}</span>
+            </li>
           ))}
         </ul>
       </div>
