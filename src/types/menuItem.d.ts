@@ -1,10 +1,29 @@
+type SanityReference = {
+  _ref: string;
+  _type: string;
+};
+
+type RawMenuItem = {
+  _id: string;
+  name: string;
+  description: string;
+  recipes: string[];
+  imageUrl: string;
+  category: string;
+};
+
 type MenuItem = {
   _id: string;
   name: string;
   description: string;
   recipes: string[];
-  image: {
-    url: string;
+  image: string;
+  category: {
+    name: string;
   };
-  category: string;
+};
+
+type SanityImageAsset = {
+  _ref: string;
+  _type: string;
 };

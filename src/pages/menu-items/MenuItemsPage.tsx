@@ -5,101 +5,7 @@ import clsx from "clsx";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import MenuItemsComponent from "@/components/MenuItemComponent";
 
-import itemImage from "@/assets/item-1.jpg";
-
-// Assuming MenuItem type is defined elsewhere and imported
-const mockMenuItems: MenuItem[] = [
-  {
-    _id: "1",
-    name: "Strawberry Shake",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "3",
-    name: "Strawberry Shake2",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "4",
-    name: "Strawberry Shake4",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "11",
-    name: "Strawberry Shake",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "5",
-    name: "Strawberry Shake2",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "6",
-    name: "Strawberry Shake4",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "7",
-    name: "Strawberry Shake",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "8",
-    name: "Strawberry Shake2",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "9",
-    name: "Strawberry Shake4",
-    description: "A delicious strawberry shake made with fresh strawberries.",
-    recipes: ["Fruit", "Dairy"],
-    image: { url: itemImage },
-    category: "Shakes",
-  },
-  {
-    _id: "2",
-    name: "Chocolate Ice Cream",
-    description: "Rich and creamy chocolate ice cream.",
-    recipes: ["Dairy", "Chocolate"],
-    image: { url: itemImage },
-    category: "Ice Cream",
-  },
-  // More items...
-];
-
-type MenuItem = {
-  _id: string;
-  name: string;
-  description: string;
-  recipes: string[];
-  image: { url: string };
-  category: string;
-};
+import fetchMenuItems from "@/sanity/fetchMenuItems";
 
 const MenuItemsPage: React.FC = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -108,16 +14,27 @@ const MenuItemsPage: React.FC = () => {
 
   useEffect(() => {
     // Simulate data fetching with a delay
-    setTimeout(() => {
-      // This is where you'd fetch your data. Using mock data for now
-      setMenuItems(mockMenuItems);
-      setActiveCategory(mockMenuItems[0]?.category || "");
-      setIsLoading(false); // Hide loading spinner and show menu items
-    }, 2000); // 2 seconds delay to simulate fetching
+    // setTimeout(() => {
+    //   // This is where you'd fetch your data. Using mock data for now
+    //   setMenuItems(mockMenuItems);
+    //   setActiveCategory(mockMenuItems[0]?.category || "");
+    //   setIsLoading(false); // Hide loading spinner and show menu items
+    // }, 2000); // 2 seconds delay to simulate fetching
+    setIsLoading(true);
+    fetchMenuItems()
+      .then((res) => {
+        setMenuItems(res);
+        setActiveCategory(res[0]?.category.name || "");
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch menu items:", error);
+        setIsLoading(false);
+      });
   }, []);
 
   const activeMenuItems = useMemo(() => {
-    return menuItems.filter((item) => item.category === activeCategory);
+    return menuItems.filter((item) => item.category.name === activeCategory);
   }, [activeCategory, menuItems]);
 
   if (isLoading) {
@@ -126,7 +43,7 @@ const MenuItemsPage: React.FC = () => {
 
   // Extract unique categories from menuItems for tabs
   const categories = Array.from(
-    new Set(menuItems.map((item) => item.category))
+    new Set(menuItems.map((item) => item.category.name))
   );
 
   const handleActiveCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -137,10 +54,10 @@ const MenuItemsPage: React.FC = () => {
   return (
     <div className="flex flex-wrap">
       <div className="w-full md:w-1/4 md:bg-stone-200 md:dark:bg-stone-800 md:bg-opacity-50">
-        <nav className="flex flex-col sticky top-0">
+        <nav className="flex flex-col sticky top-0 md:min-h-[91.5vh]">
           {categories.map((category) => (
             <button
-              key={category}
+              key={category} // Ensure 'category' is unique across all categories
               className={clsx(
                 "p-2",
                 { "bg-accent-400 text-white": activeCategory === category },
