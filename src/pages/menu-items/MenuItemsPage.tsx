@@ -2,42 +2,44 @@ import React, { useState, useEffect, useMemo } from "react";
 
 import clsx from "clsx";
 
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import {
+  fetchMenuItemsAsync,
+  selectMenuItems,
+  selectMenuItemsStatus,
+} from "@/redux/features/menuItems/menuItemsSlice";
+
 import LoadingSpinner from "@/components/LoadingSpinner";
 import MenuItemsComponent from "@/components/MenuItemComponent";
 
-import fetchMenuItems from "@/sanity/fetchMenuItems";
-
 const MenuItemsPage: React.FC = () => {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const dispatch: AppDispatch = useDispatch();
+
+  const menuItems = useSelector(selectMenuItems);
+  const status = useSelector(selectMenuItemsStatus);
+
   const [activeCategory, setActiveCategory] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Simulate data fetching with a delay
-    // setTimeout(() => {
-    //   // This is where you'd fetch your data. Using mock data for now
-    //   setMenuItems(mockMenuItems);
-    //   setActiveCategory(mockMenuItems[0]?.category || "");
-    //   setIsLoading(false); // Hide loading spinner and show menu items
-    // }, 2000); // 2 seconds delay to simulate fetching
-    setIsLoading(true);
-    fetchMenuItems()
-      .then((res) => {
-        setMenuItems(res);
-        setActiveCategory(res[0]?.category.name || "");
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch menu items:", error);
-        setIsLoading(false);
-      });
-  }, []);
+    if (status === "idle") {
+      dispatch(fetchMenuItemsAsync());
+    }
+    // This check ensures that activeCategory is set only once when the menu items are loaded and not on subsequent re-renders.
+    else if (
+      status === "succeeded" &&
+      activeCategory === "" &&
+      menuItems.length > 0
+    ) {
+      setActiveCategory(menuItems[0].category.name);
+    }
+  }, [status, dispatch, menuItems, activeCategory]);
 
   const activeMenuItems = useMemo(() => {
     return menuItems.filter((item) => item.category.name === activeCategory);
   }, [activeCategory, menuItems]);
 
-  if (isLoading) {
+  if (status === "loading") {
     return <LoadingSpinner />;
   }
 

@@ -13,8 +13,6 @@ const fetchMenuItems = async (): Promise<MenuItem[]> => {
   `;
   const result: RawMenuItem[] = await sanityClient.fetch(query);
 
-  console.log(result);
-
   // Transform the raw data to fit the MenuItem interface
   const transformed: MenuItem[] = result.map((item) => ({
     _id: item._id,
