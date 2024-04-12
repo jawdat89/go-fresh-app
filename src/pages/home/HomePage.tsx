@@ -1,4 +1,5 @@
 import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
+import { SiGooglestreetview } from "react-icons/si";
 
 import GoFreshSm from "@/assets/icon/go-fresh-transparent-sm.png";
 import LogoTransparent from "@/assets/icon/logo-1-transparent.png";
@@ -64,9 +65,9 @@ export default function HomePage() {
 
   const SocialMediaLinks = () => {
     return (
-      <section className="bg-gray-200 text-center py-10">
+      <section className="bg-gray-200 text-center py-8">
         <h2 className="text-2xl font-semibold mb-4">
-          עקוב אחרנו גם ברשתות החברתיות
+          מצא אותנו ברשתות החברתיות
         </h2>
         <div className="flex justify-center align-center gap-x-4">
           <a
@@ -94,13 +95,24 @@ export default function HomePage() {
 
   const ContactInfo = () => {
     return (
-      <section className="bg-primary text-white text-center py-10">
-        <h2 className="text-2xl font-bold mb-4">בקרו אצלנו</h2>
+      <section className="bg-primary text-white text-center pt-3">
+        <span className="flex justify-center mb-4">
+          <SiGooglestreetview size={72} />
+        </span>
         <div className="flex justify-center">
-          <img src={Place} alt="place" className="w-[25rem] h-[25rem]"></img>
+          <a
+            className="cursor-pointer"
+            href="https://www.google.com/maps/dir//go+fresh+kisra/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x151c31409e25b987:0xf9746a82b21177a5?sa=X&ved=1t:3061&ictx=111"
+          >
+            <img
+              src={Place}
+              alt="place"
+              className="w-[25rem] h-[25rem] shadow-md rounded-full shadow-accent-100 hover:scale-110 duration-200"
+            ></img>
+          </a>
         </div>
-        <p>כסרא, כסרא-סמיע</p>
-        <p>כיכר הסוס - סולט באשא</p>
+        <p className="text-xl font-bold">כסרא, כסרא-סמיע</p>
+        <p className="text-xl font-bold">כיכר הסוס - סולטן באשא</p>
       </section>
     );
   };
