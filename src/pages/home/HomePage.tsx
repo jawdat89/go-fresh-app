@@ -14,7 +14,7 @@ export default function HomePage() {
             <img
               src={GoFreshSm}
               alt="Go Fresh Logo"
-              className="mx-auto w-[25rem] h-24"
+              className="mx-auto w-[15rem] md:w-[25rem] h-18 md:h-24"
             />
             <img
               src={LogoTransparent}
@@ -23,7 +23,7 @@ export default function HomePage() {
             />
           </div>
           <div>
-            <h1 className="text-4xl font-bold text-white mt-4 ml-[17rem]">
+            <h1 className="text-xl md:text-4xl font-bold text-white mt-4 ml-[13.5rem] md:ml-[17rem]">
               BE YOURSELF
             </h1>
           </div>
