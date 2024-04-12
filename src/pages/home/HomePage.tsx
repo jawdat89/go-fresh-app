@@ -107,7 +107,7 @@ export default function HomePage() {
             <img
               src={Place}
               alt="place"
-              className="w-[25rem] h-[25rem] shadow-md rounded-full shadow-accent-100 hover:scale-110 duration-200"
+              className="w-[18rem] md:w-[25rem] h-[18rem] md:h-[25rem] shadow-md rounded-full shadow-accent-100 hover:scale-110 duration-200"
             ></img>
           </a>
         </div>
