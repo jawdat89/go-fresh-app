@@ -51,7 +51,7 @@ export default function HomePage() {
           <div className="bg-white p-6 shadow rounded">
             <h3 className="text-xl font-semibold">להזמנות ובירורים</h3>
             <a
-              href="https://wa.me/0509133588"
+              href="https://wa.me/+972509133588"
               className="text-primary hover:text-secondary transition"
             >
               <span className="text-gray-700 pl-3">0509133588</span>
@@ -77,7 +77,7 @@ export default function HomePage() {
             <FaInstagram className="inline-block text-4xl" />
           </a>
           <a
-            href="https://wa.me/0509133588"
+            href="https://wa.me/+972509133588"
             className="text-primary hover:text-secondary transition"
           >
             <FaWhatsapp className="inline-block text-4xl" />
