@@ -71,7 +71,7 @@ export default function HomePage() {
         </h2>
         <div className="flex justify-center align-center gap-x-4">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/go_.fresh/"
             className="text-primary hover:text-secondary transition"
           >
             <FaInstagram className="inline-block text-4xl" />
