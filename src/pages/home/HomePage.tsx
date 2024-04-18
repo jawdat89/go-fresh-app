@@ -1,14 +1,25 @@
+import { useState } from "react";
 import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import { SiGooglestreetview } from "react-icons/si";
+import { BsArrowRight } from "react-icons/bs";
 
 import GoFreshSm from "@/assets/icon/go-fresh-transparent-sm.png";
 import LogoTransparent from "@/assets/icon/logo-1-transparent.png";
 import Place from "@/assets/images/place.jpg";
+import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+  const [isHovered, setIsHovered] = useState(false);
+  const router = useNavigate();
+
+  const handleMoveToMenu = () => {
+    router("/menu");
+  };
+
   const HeroSection = () => {
     return (
-      <section className="bg-primary-darker dark:bg-primary text-center py-20">
+      <section className="bg-primary-darker dark:bg-primary text-center pt-20 pb-5">
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-row">
             <img
@@ -27,6 +38,24 @@ export default function HomePage() {
               BE YOURSELF
             </h1>
           </div>
+        </div>
+        <div className="flex justify-center items-end mt-10">
+          <button
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleMoveToMenu}
+            className="bg-secondary text-white font-bold py-2 px-4 rounded-full mt-4 hover:bg-secondary-darker transition duration-500 ease-in-out"
+          >
+            <div
+              className={clsx(
+                "inline-flex translate-y-1 translate-x-2 flex-col w-10 h-5 transition-transform duration-1000 ease-in-out",
+                isHovered ? "scale-125" : "-translate-x-2"
+              )}
+            >
+              <BsArrowRight size={24} />
+            </div>
+            <span>מעבר לתפריט</span>
+          </button>
         </div>
       </section>
     );
