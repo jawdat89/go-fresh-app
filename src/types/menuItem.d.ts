@@ -10,6 +10,7 @@ type RawMenuItem = {
   recipes: string[];
   imageUrl: string;
   category: string;
+  likes: number;
 };
 
 type MenuItem = {
@@ -21,9 +22,12 @@ type MenuItem = {
   category: {
     name: string;
   };
+  likes: number;
 };
 
 type SanityImageAsset = {
   _ref: string;
   _type: string;
 };
+
+type RootState = ReturnType<typeof store.getState>;

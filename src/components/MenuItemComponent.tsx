@@ -1,4 +1,5 @@
 import { PiBowlFoodFill } from "react-icons/pi";
+import LikeIncremental from "./LikeIncremental";
 
 interface MenuItemProps {
   item: MenuItem;
@@ -8,7 +9,7 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
   return (
     <div
       key={item._id}
-      className="border p-4 my-4 rounded-2xl shadow-lg bg-primary-lightest hover:scale-105 duration-200
+      className="flex flex-col border p-4 my-4 rounded-2xl shadow-lg bg-primary-lightest hover:scale-105 duration-200
         max-w-md md:max-w-sm mx-auto transition-all transform hover:shadow-xl hover:border-primary-darker min-w-[350px]
       "
     >
@@ -35,6 +36,9 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="flex flex-grow justify-end items-end">
+        <LikeIncremental itemId={item._id} />
       </div>
     </div>
   );
