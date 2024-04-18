@@ -44,7 +44,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-accent-300 dark:bg-primary-darkest shadow-lg items-center min-h-[8.5vh] max-h-[8.5vh]">
+    <nav className="bg-accent-300 dark:bg-primary-darkest shadow-lg flex items-center h-16 sm:h-20">
       <div className="max-w-6xl mx-auto px-4 w-full">
         <div className="flex justify-between">
           {/* Logo and Title Section */}
@@ -84,6 +84,7 @@ export default function Navbar() {
             "absolute z-50 top-[8.5vh] left-0 w-full bg-white dark:bg-slate-600 shadow-lg p-4 transition-all duration-300 md:hidden",
             { block: isMenuOpen, hidden: !isMenuOpen }
           )}
+          onClick={() => setIsMenuOpen(false)}
         >
           {menuItems.map((item) => (
             <Link

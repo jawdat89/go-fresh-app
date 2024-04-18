@@ -15,7 +15,7 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
       <img
         src={item.image}
         alt={item.name}
-        className="w-full h-[525px] object-cover rounded-xl shadow-lg shadow-accent-300"
+        className="w-full h-[525px] object-scale-down rounded-xl shadow-lg shadow-accent-300"
       />
       <div className="mt-4">
         <h3 className="text-3xl font-semibold text-center text-secondary-darkest">

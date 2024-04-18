@@ -56,7 +56,7 @@ const MenuItemsPage: React.FC = () => {
   return (
     <div className="flex flex-wrap">
       <div className="w-full md:w-1/4 md:bg-stone-200 md:dark:bg-stone-800 md:bg-opacity-50">
-        <nav className="flex flex-col sticky top-0 md:min-h-[91.5vh]">
+        <nav className="flex flex-col sticky top-0 md:min-h-[94.2vh]">
           {categories.map((category) => (
             <button
               key={category} // Ensure 'category' is unique across all categories
@@ -76,7 +76,7 @@ const MenuItemsPage: React.FC = () => {
         </nav>
       </div>
       <div className="w-full md:w-3/4">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 md:gap-4 p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-6 md:gap-4 p-4">
           {activeMenuItems.map((item) => (
             <MenuItemsComponent key={item._id} item={item} />
           ))}

@@ -1,6 +1,6 @@
 import JuiceCup from "@/assets/images/juice-cup.jpg";
 
-export default function NotFound() {
+export default function NotFoundPage() {
   return (
     <div className="flex items-center justify-center h-[91.5vh] bg-gray-100 px-4">
       <div className="text-center">

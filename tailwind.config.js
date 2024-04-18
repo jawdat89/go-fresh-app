@@ -22,17 +22,16 @@ export default {
         "gray-100": "#E5E5E5",
         "gray-200": "#CCCCCC",
         "gray-300": "#B3B3B3",
-        // Adding more palette colors
+        // More palette colors
         "accent-100": "#FFD700", // Example: Gold
         "accent-200": "#FF5733", // Example: Vibrant Orange
         "accent-300": "#F7F1FE", // Example: Pale Lavender Gray
         "accent-400": "#CF6344", // Example: Terracotta
         "accent-dark": "#333333", // Example: Dark Gray
       },
-      boxShadow: {
-        "custom-inner": "inset 0 200px 400px rgba(0, 0, 0, 1)",
-        "inner-primary": "inset 0 0 0 2px #f04f23",
-        "inner-secondary": "inset 0 0 0 2px #69bd45",
+      screens: {
+        "3xl": "1920px", // Example for 3xl breakpoint
+        "4xl": "2560px", // Example for 4xl breakpoint
       },
     },
   },
