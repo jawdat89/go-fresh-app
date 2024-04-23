@@ -45,6 +45,12 @@ const MenuItemsPage: React.FC = () => {
     );
   }, [categoryLikes]);
 
+  useEffect(() => {
+    if (categories.length > 0 && activeCategory === "") {
+      setActiveCategory(categories[0]);
+    }
+  }, [categories, activeCategory]);
+
   // Filter and sort menu items by the active category
   const activeMenuItems = useMemo(() => {
     return menuItems
