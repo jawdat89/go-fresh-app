@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ["Oswald", "sans-serif"], // Use for headings
+        body: ["Roboto", "sans-serif"], // Use for body text
+      },
       colors: {
         "primary-lightest": "#FAD6CC", // Lightest variation of primary
         "primary-lighter": "#F3997F",

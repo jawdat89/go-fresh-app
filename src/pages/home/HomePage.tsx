@@ -8,6 +8,7 @@ import LogoTransparent from "@/assets/icon/logo-1-transparent.png";
 import Place from "@/assets/images/place.jpg";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import ContentItem from "@/components/ContentItemComponent";
 
 export default function HomePage() {
   const [isHovered, setIsHovered] = useState(false);
@@ -39,54 +40,48 @@ export default function HomePage() {
             </h1>
           </div>
         </div>
-        <div className="flex justify-center items-end mt-10">
-          <button
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onClick={handleMoveToMenu}
-            className="bg-secondary text-white font-bold py-2 px-4 rounded-full mt-4 hover:bg-secondary-darker transition duration-500 ease-in-out"
-          >
-            <div
+        <button
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={handleMoveToMenu}
+          className="bg-secondary text-white font-bold py-3 px-6 rounded-full mt-6 hover:bg-secondary-darker transition duration-500 ease-in-out"
+        >
+          <div className="inline-flex items-center pt-2">
+            <BsArrowRight
+              size={24}
               className={clsx(
-                "inline-flex translate-y-1 translate-x-2 flex-col w-10 h-5 transition-transform duration-1000 ease-in-out",
-                isHovered ? "scale-125" : "-translate-x-2"
+                "transform transition-transform",
+                isHovered ? "translate-x-2" : "translate-x-0"
               )}
-            >
-              <BsArrowRight size={24} />
-            </div>
-            <span>מעבר לתפריט</span>
-          </button>
-        </div>
+            />
+            <span className="mx-1">מעבר לתפריט</span>
+          </div>
+        </button>
       </section>
     );
   };
   const ModernContentSection = () => {
     return (
-      <section className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-center mb-6 dark:text-white text-gray-800">
+      <section className="container mx-auto px-4 py-20 bg-gray-100 dark:bg-gray-800 text-center">
+        <h2 className="text-4xl font-bold mb-6 dark:text-white text-gray-800">
           בריא • טעים • מפנק
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white p-6 shadow rounded">
-            <h3 className="text-xl font-semibold">
-              פשוט מעולם אחר 🤤<span></span>
-            </h3>
-            <p className="mt-2">🍏🍊🍋🍌🍓🫐🥝</p>
-          </div>
-          <div className="bg-white p-6 shadow rounded">
-            <h3 className="text-xl font-semibold">פתוח כל ימי השבוע</h3>
-            <p className="mt-2">בין השעות 15:00-23:00 🤗</p>
-          </div>
-          <div className="bg-white p-6 shadow rounded">
-            <h3 className="text-xl font-semibold">להזמנות ובירורים</h3>
-            <a
-              href="https://wa.me/+972509133588"
-              className="text-primary hover:text-secondary transition"
-            >
-              <span className="text-gray-700 pl-3">0509133588</span>
-              <FaWhatsapp className="inline-block text-4xl" />
-            </a>
-          </div>
+          <ContentItem
+            title="מקור האנרגיה הטבעית שלך 🌱"
+            description="טעמו את האנרגיה המתוקה של הטבע"
+            emoji="🍏🍊🍋🍌🍓🫐🥝"
+          />
+          <ContentItem
+            title="פתוח כל ימי השבוע"
+            description="בין השעות 15:00-23:00 🤗"
+          />
+          <ContentItem
+            title="להזמנות ובירורים"
+            link="https://wa.me/+972509133588"
+            linkText="0509133588"
+            icon={<FaWhatsapp className="text-4xl" />}
+          />
         </div>
       </section>
     );
@@ -124,9 +119,10 @@ export default function HomePage() {
 
   const ContactInfo = () => {
     return (
-      <section className="bg-primary text-white text-center pt-3">
-        <span className="flex justify-center mb-4">
-          <SiGooglestreetview size={72} />
+      <section className="bg-primary text-white text-center py-3">
+        <span className="grid grid-rows-2 grid-cols-1">
+          <SiGooglestreetview size={72} className="mx-auto" />
+          <h2 className="text-2xl font-semibold">גוגל מפות</h2>
         </span>
         <div className="flex justify-center">
           <a
@@ -136,11 +132,12 @@ export default function HomePage() {
             <img
               src={Place}
               alt="place"
-              className="w-[18rem] md:w-[25rem] h-[18rem] md:h-[25rem] shadow-md rounded-full shadow-accent-100 hover:scale-110 duration-200"
+              className="w-[18rem] md:w-[25rem] h-[18rem] md:h-[25rem] shadow-md rounded-full shadow-accent-100 hover:scale-110 duration-200
+              transition-transform -translate-y-4"
             ></img>
           </a>
         </div>
-        <p className="text-xl font-bold">כסרא, כסרא-סמיע</p>
+        <p className="text-xl font-bold mt-2">כסרא, כסרא-סמיע</p>
         <p className="text-xl font-bold">כיכר הסוס - סולטן באשא</p>
       </section>
     );
