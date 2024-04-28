@@ -7,6 +7,7 @@ interface MenuItemsState {
   status: "idle" | "loading" | "failed" | "succeeded";
   isIncremented: Record<string, boolean>;
   likesCount: Record<string, number>;
+  lastFetched: string | null;
 }
 
 const initialState: MenuItemsState = {
@@ -14,6 +15,7 @@ const initialState: MenuItemsState = {
   status: "idle",
   isIncremented: {},
   likesCount: {},
+  lastFetched: null,
 };
 
 export const fetchMenuItemsAsync = createAsyncThunk(
@@ -59,7 +61,7 @@ export const menuItemsSlice = createSlice({
       const itemId = action.payload;
       if (!state.isIncremented[itemId]) {
         state.likesCount[itemId] = (state.likesCount[itemId] || 0) + 1;
-        state.isIncremented[itemId] = true; // Mark as incremented
+        state.isIncremented[itemId] = true;
       }
     },
   },
@@ -69,9 +71,9 @@ export const menuItemsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchMenuItemsAsync.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.status = "succeeded";
         state.items = action.payload;
+        state.lastFetched = JSON.stringify(new Date());
         action.payload.forEach((item) => {
           state.likesCount[item._id] = item.likes;
         });
@@ -83,7 +85,7 @@ export const menuItemsSlice = createSlice({
         const itemId = action.payload;
         if (!state.isIncremented[itemId]) {
           state.likesCount[itemId] = (state.likesCount[itemId] || 0) + 1;
-          state.isIncremented[itemId] = true; // Mark as incremented
+          state.isIncremented[itemId] = true;
         }
       });
   },

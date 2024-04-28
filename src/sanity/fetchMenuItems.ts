@@ -10,7 +10,9 @@ export const fetchMenuItems = async (): Promise<MenuItem[]> => {
       recipes,
       "imageUrl": image.asset->url,
       "category": category->name,
-      likes
+      likes,
+      _createdAt,
+      _updatedAt
     }
   `;
   try {
@@ -24,7 +26,9 @@ export const fetchMenuItems = async (): Promise<MenuItem[]> => {
       category: {
         name: item.category,
       },
-      likes: item.likes || 0, // Default to 0 if likes are undefined
+      likes: item.likes || 0,
+      _createdAt: item._createdAt,
+      _updatedAt: item._updatedAt,
     }));
   } catch (error) {
     console.error("Error fetching menu items:", error);
@@ -33,16 +37,13 @@ export const fetchMenuItems = async (): Promise<MenuItem[]> => {
 };
 
 export const updateLikes = async (itemId: string): Promise<void> => {
-  const transaction = sanityClient
-    .transaction()
-    .patch(itemId, {
-      // Use Sanity's increment function to safely increment the likes count
-      inc: { likes: 1 },
-    })
-    .commit();
-
   try {
-    await transaction;
+    await sanityClient
+      .transaction()
+      .patch(itemId, {
+        inc: { likes: 1 }, // Increment the 'likes' property
+      })
+      .commit();
   } catch (error) {
     console.error("Error incrementing likes:", error);
     throw new Error("Failed to increment likes");

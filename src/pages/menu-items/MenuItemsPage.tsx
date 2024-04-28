@@ -7,14 +7,32 @@ import {
   selectMenuItems,
   selectMenuItemsStatus,
 } from "@/redux/features/menuItems/menuItemsSlice";
+import { clearPersistedState } from "@/redux/features/general/generalSlice";
+
 import LoadingSpinner from "@/components/LoadingSpinner";
 import MenuItemsComponent from "@/components/MenuItemComponent";
+import useIsToday from "@/hooks/useIsToday";
 
 const MenuItemsPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const menuItems = useSelector(selectMenuItems);
   const status = useSelector(selectMenuItemsStatus);
+  const lastFetched = useSelector(
+    (state: RootState) => state.menuItems.lastFetched
+  );
+
+  const isToday = useIsToday(lastFetched);
+
   const [activeCategory, setActiveCategory] = useState<string>("");
+
+  useEffect(() => {
+    if (!isToday) {
+      // If it's not today, clear the persisted state and fetch fresh data
+      clearPersistedState().then(() => {
+        dispatch(fetchMenuItemsAsync());
+      });
+    }
+  }, [isToday, dispatch]);
 
   useEffect(() => {
     if (status === "idle") {

@@ -11,6 +11,8 @@ type RawMenuItem = {
   imageUrl: string;
   category: string;
   likes: number;
+  _createdAt?: string;
+  _updatedAt?: string;
 };
 
 type MenuItem = {
@@ -23,6 +25,8 @@ type MenuItem = {
     name: string;
   };
   likes: number;
+  _createdAt?: string;
+  _updatedAt?: string;
 };
 
 type SanityImageAsset = {
