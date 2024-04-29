@@ -35,7 +35,9 @@ export default function LikeIncremental({ itemId }: LikeIncrementalProps) {
 
   const handleLike = () => {
     if (!isIncremented) {
+      // local state update
       dispatch(incrementLike(itemId));
+      // async increment to update the server
       dispatch(incrementLikesAsync(itemId));
     }
   };
