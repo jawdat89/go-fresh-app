@@ -62,7 +62,7 @@ export default function HomePage() {
   };
   const ModernContentSection = () => {
     return (
-      <section className="container mx-auto px-4 py-20 bg-gray-100 dark:bg-gray-800 text-center">
+      <section className="container mx-auto px-4 py-20 bg-transparent dark:bg-gray-800 text-center">
         <h2 className="text-4xl font-bold mb-6 dark:text-white text-gray-800">
           בריא • טעים • מפנק
         </h2>
@@ -96,19 +96,19 @@ export default function HomePage() {
         <div className="flex justify-center align-center gap-x-4">
           <a
             href="https://www.instagram.com/go_.fresh/"
-            className="text-primary hover:text-secondary transition"
+            className="text-primary-darker hover:text-secondary-darker transition"
           >
             <FaInstagram className="inline-block text-4xl" />
           </a>
           <a
             href="https://wa.me/+972509133588"
-            className="text-primary hover:text-secondary transition"
+            className="text-primary-darker hover:text-secondary-darker transition"
           >
             <FaWhatsapp className="inline-block text-4xl" />
           </a>
           <a
             href="https://www.tiktok.com/@go_.fresh?_t=8fuXgil4SgR&_r=1"
-            className="text-primary hover:text-secondary transition duration-300"
+            className="text-primary-darker hover:text-secondary-darker transition duration-300"
           >
             <FaTiktok className="inline-block text-3xl mt-1" />
           </a>
