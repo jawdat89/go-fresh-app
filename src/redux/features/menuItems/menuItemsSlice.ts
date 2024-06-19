@@ -1,3 +1,4 @@
+// src/redux/features/menuItems/menuItemsSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
 import { fetchMenuItems, updateLikes } from "@/sanity/fetchMenuItems";

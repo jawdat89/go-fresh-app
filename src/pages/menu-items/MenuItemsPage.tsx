@@ -1,3 +1,4 @@
+// src/pages/menu-items/MenuItemsPage.tsx
 import React, { useState, useEffect, useMemo } from "react";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -108,7 +109,7 @@ const MenuItemsPage: React.FC = () => {
         </nav>
       </div>
       <div className="w-full md:w-3/4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-6 md:gap-4 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-4 p-4">
           {activeMenuItems.map((item) => (
             <MenuItemsComponent key={`${item._id}-menu-item`} item={item} />
           ))}

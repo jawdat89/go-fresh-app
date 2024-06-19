@@ -1,3 +1,4 @@
+// src/components/LikeIncremental.tsx
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "@/hooks/useDispatch"; // Ensure this is the correctly typed custom hook.

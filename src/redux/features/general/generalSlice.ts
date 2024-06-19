@@ -1,3 +1,4 @@
+// src/redux/features/general/generalSlice.ts
 import storage from "redux-persist/lib/storage";
 
 // Function to clear the persisted Redux state

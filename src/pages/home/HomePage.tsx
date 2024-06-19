@@ -1,3 +1,4 @@
+// src/pages/home/HomePage.tsx
 import { useState } from "react";
 import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import { SiGooglestreetview } from "react-icons/si";
@@ -11,11 +12,12 @@ import { useNavigate } from "react-router-dom";
 import ContentItem from "@/components/ContentItemComponent";
 
 export default function HomePage() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isMenuNavBtnHovered, setIsMenuNavBtnHovered] = useState(false);
+  const [isGaleryNavBtnHovered, setIsGaleryNavBtnHovered] = useState(false);
   const router = useNavigate();
 
-  const handleMoveToMenu = () => {
-    router("/menu");
+  const handleMoveToRoute = (route: string) => {
+    router(route);
   };
 
   const HeroSection = () => {
@@ -41,9 +43,9 @@ export default function HomePage() {
           </div>
         </div>
         <button
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={handleMoveToMenu}
+          onMouseEnter={() => setIsMenuNavBtnHovered(true)}
+          onMouseLeave={() => setIsMenuNavBtnHovered(false)}
+          onClick={() => handleMoveToRoute("/menu")}
           className="bg-secondary text-white font-bold py-3 px-6 rounded-full mt-6 hover:bg-secondary-darker transition duration-500 ease-in-out"
         >
           <div className="inline-flex items-center pt-2">
@@ -51,10 +53,10 @@ export default function HomePage() {
               size={24}
               className={clsx(
                 "transform transition-transform",
-                isHovered ? "translate-x-2" : "translate-x-0"
+                isMenuNavBtnHovered ? "translate-x-2" : "translate-x-0"
               )}
             />
-            <span className="mx-1">מעבר לתפריט</span>
+            <span className="mx-1">לתפריט</span>
           </div>
         </button>
       </section>
@@ -83,6 +85,23 @@ export default function HomePage() {
             icon={<FaWhatsapp className="text-4xl" />}
           />
         </div>
+        <button
+          onMouseEnter={() => setIsGaleryNavBtnHovered(true)}
+          onMouseLeave={() => setIsGaleryNavBtnHovered(false)}
+          onClick={() => handleMoveToRoute("/gallery")}
+          className="bg-primary-darker text-white font-bold py-3 px-6 rounded-full mt-6 hover:bg-primary transition duration-500 ease-in-out"
+        >
+          <div className="inline-flex items-center pt-2">
+            <BsArrowRight
+              size={24}
+              className={clsx(
+                "transform transition-transform",
+                isGaleryNavBtnHovered ? "translate-x-2" : "translate-x-0"
+              )}
+            />
+            <span className="mx-1">גלריה</span>
+          </div>
+        </button>
       </section>
     );
   };

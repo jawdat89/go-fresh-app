@@ -1,3 +1,4 @@
+// src/components/ContentItemComponent.tsx
 interface ContentItemProps {
   title?: string;
   description?: string;

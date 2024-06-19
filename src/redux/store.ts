@@ -1,3 +1,4 @@
+// src/redux/store.ts
 import {
   configureStore,
   combineReducers,

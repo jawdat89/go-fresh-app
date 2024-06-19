@@ -10,6 +10,7 @@ import LogoComponent from "./LogoComponent";
 
 const menuItems = [
   { title: "תפריט", url: "/menu" },
+  { title: "גלריה", url: "/gallery" },
   // { title: "אודות", url: "/about" },
   // { title: "צור קשר", url: "/contact" },
 ];
