@@ -4,6 +4,7 @@ export async function updateLikes(itemId: string): Promise<void> {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-functions-key": import.meta.env.VITE_FUNCTION_APP_KEY,
     },
     body: JSON.stringify({ itemId }),
   });
