@@ -14,6 +14,7 @@ const GalleryPage: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<Record<string, boolean>>(
     {}
   );
+  const [slideTimer, setSlideTimer] = useState<number>(10000);
 
   const menuItems = useSelector((state: RootState) => state.menuItems.items);
 
@@ -48,7 +49,7 @@ const GalleryPage: React.FC = () => {
         navigation={true}
         modules={[Navigation, Autoplay]}
         slidesPerView={1}
-        autoplay={{ delay: 15000 }}
+        autoplay={{ delay: slideTimer }}
         loop={duplicatedMenuItems.length >= 3}
         className="h-[84vh] border-b-2 border-neutral-400"
       >
@@ -86,6 +87,14 @@ const GalleryPage: React.FC = () => {
         isOpen={isSidePanelOpen}
         onClose={() => setIsSidePanelOpen(false)}
       >
+        <h2 className="text-xl text-primary-darker">תזמון הפעלה (שניות)</h2>
+        <input
+          className="input border-2 p-2 w-full mt-2"
+          type="number"
+          value={slideTimer / 1000}
+          onChange={(e) => setSlideTimer(parseInt(e.target.value) * 1000)}
+        />
+        <h2 className="text-xl text-primary-darker">פריטים פעילים</h2>
         <div className="space-y-4 p-4">
           {menuItems.map((item) => (
             <div key={item._id} className="grid grid-cols-2">
