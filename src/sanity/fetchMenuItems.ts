@@ -1,3 +1,4 @@
+// src/sanity/fetchMenuItems.ts
 import { sanityClient } from "./sanityClient";
 
 // Function to fetch menu items from the backend
@@ -33,19 +34,5 @@ export const fetchMenuItems = async (): Promise<MenuItem[]> => {
   } catch (error) {
     console.error("Error fetching menu items:", error);
     throw new Error("Failed to fetch menu items");
-  }
-};
-
-export const updateLikes = async (itemId: string): Promise<void> => {
-  try {
-    await sanityClient
-      .transaction()
-      .patch(itemId, {
-        inc: { likes: 1 }, // Increment the 'likes' property
-      })
-      .commit();
-  } catch (error) {
-    console.error("Error incrementing likes:", error);
-    throw new Error("Failed to increment likes");
   }
 };

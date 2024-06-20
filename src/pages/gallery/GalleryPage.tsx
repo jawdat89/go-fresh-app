@@ -36,6 +36,12 @@ const GalleryPage: React.FC = () => {
   // Filter items based on selection
   const selectedMenuItems = menuItems.filter((item) => selectedItems[item._id]);
 
+  // Duplicate slides if needed for loop mode
+  const duplicatedMenuItems =
+    selectedMenuItems.length < 3
+      ? [...selectedMenuItems, ...selectedMenuItems]
+      : selectedMenuItems;
+
   return (
     <div className="relative">
       <Swiper
@@ -43,11 +49,11 @@ const GalleryPage: React.FC = () => {
         modules={[Navigation, Autoplay]}
         slidesPerView={1}
         autoplay={{ delay: 15000 }}
-        loop={true}
+        loop={duplicatedMenuItems.length >= 3}
         className="h-[84vh] border-b-2 border-neutral-400"
       >
-        {selectedMenuItems.map((item) => (
-          <SwiperSlide key={item._id}>
+        {duplicatedMenuItems.map((item, index) => (
+          <SwiperSlide key={`${item._id}-${index}`}>
             <div className="flex justify-center items-center h-full">
               <div className="flex flex-col items-center">
                 <img

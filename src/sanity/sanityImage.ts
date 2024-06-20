@@ -1,3 +1,4 @@
+// src/sanity/sanityImage.ts
 import { sanityClient } from "./sanityClient";
 import imageUrlBuilder from "@sanity/image-url";
 

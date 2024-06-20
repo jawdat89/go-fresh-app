@@ -1,3 +1,4 @@
+// src/sanity/sanityClient.ts
 import { createClient } from "@sanity/client";
 
 // Dynamically select the API token based on the environment
