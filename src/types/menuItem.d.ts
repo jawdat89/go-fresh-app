@@ -35,3 +35,5 @@ type SanityImageAsset = {
 };
 
 type RootState = ReturnType<typeof store.getState>;
+
+// todo: add identifier for items that are not ready
