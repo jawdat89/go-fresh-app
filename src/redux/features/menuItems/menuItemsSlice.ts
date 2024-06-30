@@ -6,6 +6,7 @@ import { updateLikes } from "@/sanity/updateLikes";
 
 interface MenuItemsState {
   items: MenuItem[];
+  categories: string[];
   status: "idle" | "loading" | "failed" | "succeeded";
   isIncremented: Record<string, boolean>;
   likesCount: Record<string, number>;
@@ -14,6 +15,7 @@ interface MenuItemsState {
 
 const initialState: MenuItemsState = {
   items: [],
+  categories: [],
   status: "idle",
   isIncremented: {},
   likesCount: {},
@@ -79,6 +81,9 @@ export const menuItemsSlice = createSlice({
         action.payload.forEach((item) => {
           state.likesCount[item._id] = item.likes;
         });
+        // Extract categories
+        const categories = action.payload.map(item => item.category.name);
+        state.categories = Array.from(new Set(categories));
       })
       .addCase(fetchMenuItemsAsync.rejected, (state) => {
         state.status = "failed";
@@ -102,3 +107,4 @@ export const selectLikesCount = (state: RootState) =>
   state.menuItems.likesCount;
 export const selectIsIncremented = (state: RootState) =>
   state.menuItems.isIncremented;
+export const selectCategories = (state: RootState) => state.menuItems.categories;

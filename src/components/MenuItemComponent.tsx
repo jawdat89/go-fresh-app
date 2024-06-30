@@ -10,15 +10,15 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
   return (
     <div
       key={item._id}
-      className="flex flex-col border p-4 my-4 rounded-2xl shadow-lg bg-white hover:scale-105 duration-200 max-w-md md:max-w-sm mx-auto transition-all transform hover:shadow-xl hover:border-primary-darker"
+      className="flex flex-col border p-4 my-4 rounded-2xl shadow-lg bg-white hover:scale-105 duration-200 max-w-md md:max-w-sm max-h-100 md:max-h-max mx-auto transition-all transform hover:shadow-xl hover:border-primary-darker"
     >
       <img
         src={item.image}
         alt={item.name}
-        className="w-full h-[300px] object-cover rounded-xl shadow-md"
+        className="w-full h-[100px] 2xl:h-fit object-cover rounded-xl shadow-md"
       />
       <div className="mt-4 flex-grow">
-        <h3 className="text-3xl font-semibold text-center text-primary-darkest">
+        <h3 className="text-xl 2xl:text-3xl font-semibold text-center text-primary-darkest">
           {item.name}
         </h3>
         <p className="text-md text-gray-700 mt-2">{item.description}</p>
