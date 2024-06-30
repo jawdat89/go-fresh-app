@@ -11,6 +11,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { fetchMenuItemsAsync, selectMenuItems, selectMenuItemsStatus } from "@/redux/features/menuItems/menuItemsSlice";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Dialog from "@/components/Dialog";
+import clsx from "clsx";
 
 const GalleryPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -24,6 +25,8 @@ const GalleryPage: React.FC = () => {
   const [slideTimer, setSlideTimer] = useState<number>(10000);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentSlideMenuItem, setCurrentSlideMenuItem] = useState<MenuItem | undefined>();
+  const [isLandscape, setIsLandscape] = useState<boolean>(false);
+
 
   useEffect(() => {
     if (status === "idle") {
@@ -38,6 +41,19 @@ const GalleryPage: React.FC = () => {
     });
     setSelectedItems(initialSelections);
   }, [menuItems]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLandscape(window.innerWidth > window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Call it on mount to set the initial state
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const toggleItemSelection = (itemId: string) => {
     setSelectedItems((prevState) => ({
@@ -63,8 +79,20 @@ const GalleryPage: React.FC = () => {
     return <LoadingSpinner />;
   }
 
-  const DialogContent = () => (<img src={currentSlideMenuItem?.image} alt={currentSlideMenuItem?.name} className="w-[80vw] md:w-[50vw] 2xl:w-[20vw] object-contain rounded-3xl drop-shadow-2xl border-2 border-secondary-darkest" />)
-
+  const DialogContent = () => (
+    <img
+      src={currentSlideMenuItem?.image}
+      alt={currentSlideMenuItem?.name}
+      className={clsx(
+        "object-contain rounded-3xl drop-shadow-2xl border-2 border-secondary-darkest",
+        {
+          "w-[20vw]": isLandscape,
+          "w-[50vw]": !isLandscape,
+        }
+      )}
+    />
+  );
+  
   return (
     <>
     <div className="relative">
