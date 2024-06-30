@@ -22,7 +22,7 @@ const SidePanel: FC<SidePanelProps> = ({ isOpen, onClose, children }) => {
       />
       <div
         className={clsx(
-          `fixed inset-y-0 right-0 z-50 bg-white dark:bg-gray-800 w-1/3 shadow-lg transition-transform duration-300 transform overflow-auto`,
+          `fixed inset-y-0 right-0 z-50 bg-white dark:bg-gray-800 w-2/3 md:w-1/3 shadow-lg transition-transform duration-300 transform overflow-auto`,
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >

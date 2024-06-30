@@ -1,13 +1,21 @@
 // src/components/MenuItemComponent.tsx
+import { useState } from "react";
 import { PiBowlFoodFill } from "react-icons/pi";
 import LikeIncremental from "./LikeIncremental";
+import Dialog from "./Dialog";
 
 interface MenuItemProps {
   item: MenuItem;
 }
 
 const MenuItemsComponent = ({ item }: MenuItemProps) => {
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const ImageDialogContent = () => <img src={item.image} alt={item.name} className="w-[80vw] md:w-[50vw] 2xl:w-[20vw] object-contain rounded-3xl drop-shadow-2xl border-2 border-secondary-darkest" />;
+
   return (
+    <>
     <div
       key={item._id}
       className="flex flex-col border p-4 my-4 rounded-2xl shadow-lg bg-white hover:scale-105 duration-200 max-w-md md:max-w-sm max-h-100 md:max-h-max mx-auto transition-all transform hover:shadow-xl hover:border-primary-darker"
@@ -15,7 +23,8 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
       <img
         src={item.image}
         alt={item.name}
-        className="w-full h-[100px] 2xl:h-fit object-cover rounded-xl shadow-md"
+        className="w-full h-[200px] md:h-[100px] 2xl:h-fit object-cover rounded-xl shadow-md"
+        onClick={() => setIsDialogOpen(true)}
       />
       <div className="mt-4 flex-grow">
         <h3 className="text-xl 2xl:text-3xl font-semibold text-center text-primary-darkest">
@@ -44,7 +53,16 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
         </span> */}
         <LikeIncremental itemId={item._id} />
       </div>
+
+
     </div>
+          <Dialog
+          open={isDialogOpen}
+          allowClose={true}
+          contents={<ImageDialogContent/>}
+          dialogStateChange={(open) => setIsDialogOpen(open)}
+        />
+        </>
   );
 };
 

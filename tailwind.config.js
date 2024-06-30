@@ -37,6 +37,15 @@ export default {
         "3xl": "1920px", // Example for 3xl breakpoint
         "4xl": "2560px", // Example for 4xl breakpoint
       },
+      animation: {
+        'fade-in': 'fadeIn 0.3s ease-in-out forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+      },
     },
   },
   plugins: [],

@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchMenuItemsAsync, selectMenuItems, selectMenuItemsStatus } from "@/redux/features/menuItems/menuItemsSlice";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import Dialog from "@/components/Dialog";
 
 const GalleryPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -18,9 +19,11 @@ const GalleryPage: React.FC = () => {
   const categories = useSelector((state: RootState) => state.menuItems.categories);
 
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState<Record<string, boolean>>({});
   const [slideTimer, setSlideTimer] = useState<number>(10000);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [currentSlideMenuItem, setCurrentSlideMenuItem] = useState<MenuItem | undefined>();
 
   useEffect(() => {
     if (status === "idle") {
@@ -60,7 +63,10 @@ const GalleryPage: React.FC = () => {
     return <LoadingSpinner />;
   }
 
+  const DialogContent = () => (<img src={currentSlideMenuItem?.image} alt={currentSlideMenuItem?.name} className="w-[80vw] md:w-[50vw] 2xl:w-[20vw] object-contain rounded-3xl drop-shadow-2xl border-2 border-secondary-darkest" />)
+
   return (
+    <>
     <div className="relative">
       <Swiper
         navigation={true}
@@ -68,16 +74,19 @@ const GalleryPage: React.FC = () => {
         slidesPerView={1}
         autoplay={{ delay: slideTimer }}
         loop={duplicatedMenuItems.length >= 3}
-        className="h-[60vh] 2xl:h-[84vh] border-b-2 border-neutral-400"
+        onSlideChange={(swiper) => setCurrentSlideMenuItem(selectedMenuItems[swiper.realIndex])}
+        onChange={() => setCurrentSlideMenuItem(selectedMenuItems[0])}
+        className="h-[78vh] md:h-[83.5vh] 2xl:h-[84vh] border-b-2 border-neutral-400"
       >
         {duplicatedMenuItems.map((item, index) => (
           <SwiperSlide key={`${item._id}-${index}`}>
-            <div className="flex justify-center items-center h-[60vh] 2xl:h-full">
+            <div className="flex justify-center items-center h-full">
               <div className="flex flex-col items-center">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="object-contain h-[250px] 2xl:h-fit max-h-96 w-full rounded-xl shadow-xl"
+                  className="object-contain h-[300px] md:h-[250px] 2xl:h-fit max-h-96 w-full rounded-xl shadow-xl"
+                  onClick={() => setIsDialogOpen(true)}
                 />
                 <div className="flex flex-col mt-4 bg-primary-lighter dark:bg-primary-lightest p-10 rounded-xl">
                   <h3 className="text-xl 2xl:text-3xl font-semibold text-center text-primary-darkest">
@@ -118,7 +127,7 @@ const GalleryPage: React.FC = () => {
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
-          <option value="all">All Categories</option>
+          <option value="all">כל הקטגוריות</option>
           {categories && categories.map((category) => (
             <option key={category} value={category}>
               {category}
@@ -146,6 +155,13 @@ const GalleryPage: React.FC = () => {
         </div>
       </SidePanel>
     </div>
+    <Dialog
+      open={isDialogOpen}
+      allowClose={true}
+      contents={<DialogContent />}
+      dialogStateChange={(open) => setIsDialogOpen(open)}
+      />
+    </>
   );
 };
 
