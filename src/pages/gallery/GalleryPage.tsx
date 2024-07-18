@@ -110,7 +110,7 @@ const GalleryPage: React.FC = () => {
           loop={duplicatedMenuItems.length >= 3}
           onSlideChange={(swiper) => setCurrentSlideMenuItem(selectedMenuItems[swiper.realIndex])}
           onChange={() => setCurrentSlideMenuItem(selectedMenuItems[0])}
-          className="h-[78vh] md:h-[83.5vh] 2xl:h-[84vh] border-b-2 border-neutral-400"
+          className="h-[85vh] md:h-[90vh]"
         >
           {duplicatedMenuItems.map((item, index) => (
             <SwiperSlide key={`${item._id}-${index}`}>
@@ -119,7 +119,7 @@ const GalleryPage: React.FC = () => {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="object-contain h-[300px] md:h-[250px] 2xl:h-fit max-h-96 w-full rounded-xl shadow-xl"
+                    className="object-cover h-[70vh] md:h-[60vh] max-h-full w-full rounded-xl shadow-xl"
                     onClick={() => setIsDialogOpen(true)}
                   />
                   <div className="flex flex-col mt-4 bg-primary-lighter dark:bg-primary-lightest p-10 rounded-xl">
@@ -138,57 +138,59 @@ const GalleryPage: React.FC = () => {
 
         <button
           onClick={() => setIsSidePanelOpen(true)}
-          className="block 2xl:fixed 2xl:bottom-4 mt-2 2xl:mt-0 mr-4 2xl:mr-0 right-4 p-2 bg-primary text-white rounded-md shadow-lg hover:bg-primary-darker transition"
+          className="block fixed bottom-4 right-4 p-2 bg-primary text-white rounded-md shadow-lg hover:bg-primary-darker transition z-50"
         >
           &#9776;
         </button>
-
-        <SidePanel
+      </div>
+      <SidePanel
           isOpen={isSidePanelOpen}
           onClose={() => setIsSidePanelOpen(false)}
+          className="bg-neutral-100"
         >
-          <h2 className="text-md 2xl:text-xl text-primary-darker">תזמון הפעלה (שניות)</h2>
-          <input
-            className="input border-2 p-2 w-full mt-2"
-            type="number"
-            value={slideTimer / 1000}
-            onChange={(e) => setSlideTimer(parseInt(e.target.value) * 1000)}
-          />
+          <div className="sticky z-10 ">
+            <h2 className="text-lg text-primary-darker dark:text-primary-lighter mb-2">תזמון הפעלה (שניות)</h2>
+            <input
+              className="input border-2 p-1 w-full mb-4"
+              type="number"
+              value={slideTimer / 1000}
+              onChange={(e) => setSlideTimer(parseInt(e.target.value) * 1000)}
+            />
 
-          <h2 className="text-xl text-primary-darker">קטגוריות</h2>
-          <select
-            className="input border-2 p-2 w-full mt-2"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="all">כל הקטגוריות</option>
-            {categories && categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+            <h2 className="text-lg text-primary-darker dark:text-primary-lighter mb-4">קטגוריות</h2>
+            <select
+              className="input border-2 p-1 w-full mb-4"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="all">כל הקטגוריות</option>
+              {categories && categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
 
-          <h2 className="text-xl text-primary-darker">פריטים פעילים</h2>
-          <div className="space-y-4 p-4">
+            <h2 className="text-lg text-primary-darker dark:text-primary-lighter mb-4">פריטים פעילים</h2>
+          </div>
+          <div className="overflow-auto h-[calc(100vh-300px)] p-4">
             {menuItems
               .filter((item) => selectedCategory === "all" || item.category.name === selectedCategory)
               .map((item) => (
-                <div key={item._id} className="grid grid-cols-2">
+                <div key={item._id} className="flex items-center justify-between mb-4">
                   <input
                     type="checkbox"
                     checked={selectedItems[item._id] || false}
                     onChange={() => toggleItemSelection(item._id)}
                     className="form-checkbox h-5 w-5 text-primary"
                   />
-                  <span className="text-gray-700 dark:text-gray-300 text-left">
+                  <span className="text-gray-700 dark:text-gray-300">
                     {item.name}
                   </span>
                 </div>
               ))}
           </div>
         </SidePanel>
-      </div>
       <Dialog
         open={isDialogOpen}
         allowClose={true}
