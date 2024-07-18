@@ -1,9 +1,13 @@
 // src/components/MenuItemComponent.tsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PiBowlFoodFill } from "react-icons/pi";
 import LikeIncremental from "./LikeIncremental";
 import Dialog from "./Dialog";
 import clsx from "clsx";
+import {
+  isTablet,
+  useMobileOrientation,
+} from "react-device-detect";
 
 interface MenuItemProps {
   item: MenuItem;
@@ -11,30 +15,19 @@ interface MenuItemProps {
 
 const MenuItemsComponent = ({ item }: MenuItemProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isLandscape, setIsLandscape] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLandscape(window.innerWidth > window.innerHeight);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { isLandscape } = useMobileOrientation();
 
   const ImageDialogContent = () => (
     <img
       src={item.image}
       alt={item.name}
       className={clsx(
-        "object-contain rounded-3xl drop-shadow-2xl border-2 border-secondary-darkest",
+        "object-fit rounded-3xl drop-shadow-2xl border-2 border-secondary-darkest",
         {
-          "w-[20vw]": isLandscape,
-          "w-[50vw]": !isLandscape,
+          "max-h-[80vh]": !isTablet, // Mobile
+          "max-h-[79vh]": isTablet && !isLandscape, // Wide-screen landscape
+          "max-h-[70vh]": isTablet &&  isLandscape, // Tablet landscape
         }
       )}
     />
@@ -44,12 +37,20 @@ const MenuItemsComponent = ({ item }: MenuItemProps) => {
     <>
       <div
         key={item._id}
-        className="flex flex-col border p-4 my-4 rounded-2xl shadow-lg bg-white hover:scale-105 duration-200 max-w-md md:max-w-sm max-h-100 md:max-h-max mx-auto transition-all transform hover:shadow-xl hover:border-primary-darker"
+        className={clsx("flex flex-col border p-4 my-4 rounded-2xl shadow-lg bg-white hover:scale-105 duration-200 max-w-md md:max-w-sm max-h-100 md:max-h-max mx-auto transition-all transform hover:shadow-xl hover:border-primary-darker",
+          isTablet && "min-w-56",
+        )}
       >
         <img
           src={item.image}
           alt={item.name}
-          className="w-full h-[200px] md:h-[100px] 2xl:h-fit object-cover rounded-xl shadow-md"
+          className={clsx("w-full 2xl:h-fit object-cover rounded-xl shadow-md",
+            {
+              "h-[300px]": !isTablet, // Mobile
+              "h-[250px]": isTablet && !isLandscape, // Wide-screen landscape
+              "h-[200px]": isTablet && isLandscape, // Tablet landscape
+            }
+          )}
           onClick={() => setIsDialogOpen(true)}
         />
         <div className="mt-4 flex-grow">

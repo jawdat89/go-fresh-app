@@ -2,17 +2,20 @@
 import React, { useState, useEffect, useMemo } from "react";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import {
   fetchMenuItemsAsync,
   selectMenuItems,
   selectMenuItemsStatus,
 } from "@/redux/features/menuItems/menuItemsSlice";
 import { clearPersistedState } from "@/redux/features/general/generalSlice";
-
 import LoadingSpinner from "@/components/LoadingSpinner";
 import MenuItemsComponent from "@/components/MenuItemComponent";
 import useIsToday from "@/hooks/useIsToday";
+import {
+  isTablet,
+  useMobileOrientation,
+} from "react-device-detect";
 
 const MenuItemsPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -25,6 +28,8 @@ const MenuItemsPage: React.FC = () => {
   const isToday = useIsToday(lastFetched);
 
   const [activeCategory, setActiveCategory] = useState<string>("");
+
+  const { isLandscape } = useMobileOrientation();
 
   useEffect(() => {
     if (!isToday) {
@@ -109,7 +114,12 @@ const MenuItemsPage: React.FC = () => {
         </nav>
       </div>
       <div className="w-full md:w-3/4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-4 p-4">
+        <div className={clsx(
+          "grid grid-cols-1  gap-6 md:gap-4 p-4",
+          isTablet && !isLandscape && "grid-cols-2",
+          isTablet && isLandscape && "grid-cols-3",
+          !isTablet && "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        )}>
           {activeMenuItems.map((item) => (
             <MenuItemsComponent key={`${item._id}-menu-item`} item={item} />
           ))}
