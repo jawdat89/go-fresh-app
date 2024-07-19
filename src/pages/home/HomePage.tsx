@@ -9,12 +9,18 @@ import LogoTransparent from "@/assets/icon/logo-1-transparent.png";
 import Place from "@/assets/images/place.jpg";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import {
+  isMobile,
+  useMobileOrientation,
+} from "react-device-detect";
 import ContentItem from "@/components/ContentItemComponent";
 
 export default function HomePage() {
   const [isMenuNavBtnHovered, setIsMenuNavBtnHovered] = useState(false);
   const [isGaleryNavBtnHovered, setIsGaleryNavBtnHovered] = useState(false);
   const navigate = useNavigate();
+
+  const { isLandscape } = useMobileOrientation();
 
   const handleMoveToRoute = (route: string) => {
     navigate(route);
@@ -36,7 +42,10 @@ export default function HomePage() {
               className="w-24 h-24 ml-4"
             />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold drop-shadow-md text-white mb-4">
+          <h1 className={clsx(
+            "text-4xl md:text-6xl font-bold drop-shadow-md text-white mb-4",
+            isMobile && !isLandscape && "text-[1.9rem]"
+          )}>
           אמץ את האותנטיות שלך
           </h1>
           <p className="text-lg md:text-2xl text-secondary-lighter mb-8 drop-shadow-xl border-secondary-lightest">
@@ -111,25 +120,30 @@ export default function HomePage() {
   const SocialMediaLinks = () => {
     return (
       <section className="bg-gray-100 py-16">
-        <h2 className="text-3xl mr-24  font-semibold mb-8">
-        צור איתנו קשר ברשתות החברתית
+        <h2
+          className={clsx(
+            "text-3xl font-semibold mb-8",
+            isMobile ? "text-center" : "mr-24"
+          )}
+        >
+          צור איתנו קשר ברשתות החברתיות
         </h2>
         <div className="flex justify-center gap-8">
           <a
             href="https://www.instagram.com/go_.fresh/"
-            className="text-primary-darker hover:text-secondary-darker transition"
+            className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaInstagram className="text-4xl" />
           </a>
           <a
             href="https://wa.me/+972509133588"
-            className="text-primary-darker hover:text-secondary-darker transition"
+            className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaWhatsapp className="text-4xl" />
           </a>
           <a
             href="https://www.tiktok.com/@go_.fresh?_t=8fuXgil4SgR&_r=1"
-            className="text-primary-darker hover:text-secondary-darker transition"
+            className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaTiktok className="text-4xl" />
           </a>

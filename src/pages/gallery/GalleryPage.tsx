@@ -13,6 +13,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import Dialog from "@/components/Dialog";
 import clsx from "clsx";
 import {
+  isMobile,
   isTablet,
   useMobileOrientation,
 } from "react-device-detect";
@@ -119,7 +120,9 @@ const GalleryPage: React.FC = () => {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="object-cover h-[70vh] md:h-[60vh] max-h-full w-full rounded-xl shadow-xl"
+                    className={clsx("object-cover h-[70vh] md:h-[60vh] max-h-full w-full rounded-xl shadow-xl",
+                      isMobile && !isLandscape && "h-[50vh] w-[70vw]", // Mobile
+                    )}
                     onClick={() => setIsDialogOpen(true)}
                   />
                   <div className="flex flex-col mt-4 bg-primary-lighter dark:bg-primary-lightest p-10 rounded-xl">
