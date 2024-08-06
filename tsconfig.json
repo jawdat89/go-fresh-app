@@ -29,6 +29,11 @@
       "@/pages/*": ["src/pages/*"],
     }
   },
-  "include": ["src"],
+  "include": [
+    "vite.config.ts",
+    "tailwind.config.ts",
+    "src/**/*", 
+  ],
+  "exclude": ["node_modules", "dist", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
