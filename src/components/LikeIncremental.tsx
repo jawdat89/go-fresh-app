@@ -1,13 +1,13 @@
 // src/components/LikeIncremental.tsx
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "@/hooks/useDispatch"; // Ensure this is the correctly typed custom hook.
+import { useDispatch } from "@/app/hooks/useDispatch"; // Ensure this is the correctly typed custom hook.
 import {
   incrementLike,
   incrementLikesAsync,
   selectIsIncremented,
   selectLikesCount,
-} from "@/redux/features/menuItems/menuItemsSlice";
+} from "@/app/redux/features/menuItems/menuItemsSlice";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
 interface LikeIncrementalProps {

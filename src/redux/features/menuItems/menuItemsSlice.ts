@@ -1,8 +1,8 @@
 // src/redux/features/menuItems/menuItemsSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "@/redux/store";
-import { fetchMenuItems } from "@/sanity/fetchMenuItems";
-import { updateLikes } from "@/sanity/updateLikes";
+import { RootState } from "@/app/redux/store";
+import { fetchMenuItems } from "@/app/sanity/fetchMenuItems";
+import { updateLikes } from "@/app/sanity/updateLikes";
 
 interface MenuItemsState {
   items: MenuItem[];

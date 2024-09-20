@@ -10,7 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Define your aliases here
-      "@": "/src",
+      "@/app": "/src",
       "@/components": "/src/components",
       "@/assets": "/src/assets",
       "@/pages": "/src/pages",

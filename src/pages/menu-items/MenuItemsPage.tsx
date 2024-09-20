@@ -2,16 +2,16 @@
 import React, { useState, useEffect, useMemo } from "react";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/redux/store";
+import { AppDispatch, RootState } from "@/app/redux/store";
 import {
   fetchMenuItemsAsync,
   selectMenuItems,
   selectMenuItemsStatus,
-} from "@/redux/features/menuItems/menuItemsSlice";
-import { clearPersistedState } from "@/redux/features/general/generalSlice";
+} from "@/app/redux/features/menuItems/menuItemsSlice";
+import { clearPersistedState } from "@/app/redux/features/general/generalSlice";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import MenuItemsComponent from "@/components/MenuItemComponent";
-import useIsToday from "@/hooks/useIsToday";
+import useIsToday from "@/app/hooks/useIsToday";
 import {
   isTablet,
   useMobileOrientation,

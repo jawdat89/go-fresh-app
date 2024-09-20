@@ -1,3 +1,4 @@
+// src/pages/not-found/NotFoundPage.tsx
 import JuiceCup from "@/assets/images/juice-cup.jpg";
 
 export default function NotFoundPage() {

@@ -1,8 +1,9 @@
+// src/hooks/useDarkMode.ts
 import { useEffect, useState } from "react";
 
 const key = "go-fresh-theme";
 
-export default function useDarkSide(): [ThemeMode, (theme: ThemeMode) => void] {
+export default function useDarkMode(): [ThemeMode, (theme: ThemeMode) => void] {
   // Initialize state with 'light' or 'dark', or fallback to system preference if not set
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const storedTheme = localStorage.getItem(key);

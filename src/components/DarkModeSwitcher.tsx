@@ -1,19 +1,20 @@
+// src/components/DarkModeSwitcher.tsx
 import React, { useState, useEffect } from "react";
-import useDarkSide from "@/hooks/useDarkSide"; // Adjust the path as necessary
+import useDarkMode from "@/app/hooks/useDarkMode"; // Adjust the path as necessary
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 const DarkModeSwitcher: React.FC = () => {
-  const [colorTheme, setTheme] = useDarkSide();
-  const [darkSide, setDarkSide] = useState<boolean>(colorTheme === "dark");
+  const [colorTheme, setTheme] = useDarkMode();
+  const [darkMode, setDarkMode] = useState<boolean>(colorTheme === "dark");
 
-  // Ensure that the darkSide state is correctly updated when colorTheme changes
+  // Ensure that the darkMode state is correctly updated when colorTheme changes
   useEffect(() => {
-    setDarkSide(colorTheme === "dark");
+    setDarkMode(colorTheme === "dark");
   }, [colorTheme]);
 
   const toggleDarkMode = (checked: boolean): void => {
     setTheme(colorTheme);
-    setDarkSide(checked);
+    setDarkMode(checked);
   };
 
   return (
@@ -23,7 +24,7 @@ const DarkModeSwitcher: React.FC = () => {
       "
       >
         <DarkModeSwitch
-          checked={darkSide}
+          checked={darkMode}
           onChange={toggleDarkMode}
           size={24}
           sunColor="var(--accent-100)"
