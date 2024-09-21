@@ -5,13 +5,16 @@ Go Fresh App is a digital menu for a drinks startup shop. It provides an interac
 
 ## Technologies Used
 - Vite React: For fast and efficient frontend development
+- Vitest: Unit testing
 - TailwindCSS: For responsive and customizable styling
 - Sanity.io: For content management
 - Vercel: For deployment and hosting
+- Azure Functions: For secure backend data manipulation (Like increment)
 
 ## Features
 - Display of drink menu items
-- [Add any other key features of your app]
+- Anonymous user can increment Like of each menu item
+- PWA ready
 
 ## Installation
 To run this project locally:
@@ -24,4 +27,4 @@ Copyright © 2024 Jawdat Abdullah. All rights reserved.
 
 ## License
 
-This project is proprietary and may not be used, copied, or distributed without express written permission. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
