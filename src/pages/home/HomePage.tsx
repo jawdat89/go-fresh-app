@@ -131,18 +131,21 @@ export default function HomePage() {
         <div className="flex justify-center gap-8">
           <a
             href="https://www.instagram.com/go_.fresh/"
+            aria-label="Instagram"
             className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaInstagram className="text-4xl" />
           </a>
           <a
             href="https://wa.me/+972509133588"
+            aria-label="WhatsApp"
             className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaWhatsapp className="text-4xl" />
           </a>
           <a
             href="https://www.tiktok.com/@go_.fresh?_t=8fuXgil4SgR&_r=1"
+            aria-label="TikTok"
             className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaTiktok className="text-4xl" />

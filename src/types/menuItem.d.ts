@@ -1,3 +1,4 @@
+// src/types/menuItem.d.ts
 type SanityReference = {
   _ref: string;
   _type: string;

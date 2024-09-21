@@ -18,7 +18,7 @@ import storage from "redux-persist/lib/storage";
 
 import menuItemsReducer from "./features/menuItems/menuItemsSlice";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   menuItems: menuItemsReducer,
 });
 

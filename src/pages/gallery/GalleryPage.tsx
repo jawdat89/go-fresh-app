@@ -42,9 +42,11 @@ const GalleryPage: React.FC = () => {
 
   useEffect(() => {
     const initialSelections: Record<string, boolean> = {};
-    menuItems.forEach((item) => {
-      initialSelections[item._id] = true;
-    });
+    if (menuItems) {
+      menuItems.forEach((item) => {
+        initialSelections[item._id] = true;
+      });
+    }
     setSelectedItems(initialSelections);
   }, [menuItems]);
 
@@ -69,11 +71,11 @@ const GalleryPage: React.FC = () => {
   };
 
   const selectedMenuItems = useMemo(() => {
-    return menuItems.filter(
+    return menuItems ? menuItems.filter(
       (item) =>
         selectedItems[item._id] &&
         (selectedCategory === "all" || item.category.name === selectedCategory)
-    );
+    ) : [];
   }, [selectedItems, selectedCategory, menuItems]);
 
   const duplicatedMenuItems =
@@ -177,7 +179,7 @@ const GalleryPage: React.FC = () => {
             <h2 className="text-lg text-primary-darker dark:text-primary-lighter mb-4">פריטים פעילים</h2>
           </div>
           <div className="overflow-auto h-[calc(100vh-300px)] p-4">
-            {menuItems
+            {menuItems && menuItems
               .filter((item) => selectedCategory === "all" || item.category.name === selectedCategory)
               .map((item) => (
                 <div key={item._id} className="flex items-center justify-between mb-4">

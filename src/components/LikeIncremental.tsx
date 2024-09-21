@@ -45,6 +45,7 @@ export default function LikeIncremental({ itemId }: LikeIncrementalProps) {
 
   return (
     <button
+      aria-label="like"
       onClick={handleLike}
       disabled={isIncremented}
       style={{ border: "none", background: "none" }}
