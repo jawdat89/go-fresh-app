@@ -9,10 +9,7 @@ import LogoTransparent from "@/assets/icon/logo-1-transparent.png";
 import Place from "@/assets/images/place.jpg";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
-import {
-  isMobile,
-  useMobileOrientation,
-} from "react-device-detect";
+import { isMobile, useMobileOrientation } from "react-device-detect";
 import ContentItem from "@/components/ContentItemComponent";
 
 export default function HomePage() {
@@ -30,7 +27,7 @@ export default function HomePage() {
     return (
       <section className="bg-primary text-center py-20">
         <div className="flex flex-col justify-center items-center">
-          <div className="flex flex-row items-center mb-8 shadow-2xl drop-shadow-xl border-secondary-lightest p-3">
+          <div className="flex flex-row items-center mb-8 bg-slate-700 bg-opacity-10 border-secondary-lightest p-3 rounded-3xl">
             <img
               src={GoFreshSm}
               alt="Go Fresh Logo"
@@ -42,14 +39,16 @@ export default function HomePage() {
               className="w-24 h-24 ml-4"
             />
           </div>
-          <h1 className={clsx(
-            "text-4xl md:text-6xl font-bold drop-shadow-md text-white mb-4",
-            isMobile && !isLandscape && "text-[1.9rem]"
-          )}>
-          אמץ את האותנטיות שלך
+          <h1
+            className={clsx(
+              "text-4xl md:text-6xl font-bold drop-shadow-md text-white mb-4",
+              isMobile && !isLandscape && "text-[1.9rem]"
+            )}
+          >
+            אמץ את האותנטיות שלך
           </h1>
-          <p className="text-lg md:text-2xl text-secondary-lighter mb-8 drop-shadow-xl border-secondary-lightest">
-          גלה את הטעם הטבעי של רעננות
+          <p className="text-lg md:text-2xl text-stone-300 mb-8 shadow-2xl">
+            גלה את הטעם הטבעי של רעננות
           </p>
           <button
             onMouseEnter={() => setIsMenuNavBtnHovered(true)}
@@ -77,7 +76,7 @@ export default function HomePage() {
     return (
       <section className="container mx-auto px-4 py-20 text-center">
         <h2 className="text-4xl font-bold mb-12 text-gray-800 dark:text-white">
-        בריא • טעים • מפנק
+          בריא • טעים • מפנק
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ContentItem
@@ -119,11 +118,11 @@ export default function HomePage() {
 
   const SocialMediaLinks = () => {
     return (
-      <section className="bg-gray-100 py-16">
+      <section className="bg-gray-100 dark:bg-gray-100-dark py-16">
         <h2
           className={clsx(
-            "text-3xl font-semibold mb-8",
-            isMobile ? "text-center" : "mr-24"
+            "text-3xl font-semibold mb-8 text-stone-700 dark:text-stone-300",
+            isMobile ? "text-center" : "text-center"
           )}
         >
           צור איתנו קשר ברשתות החברתיות
@@ -132,21 +131,21 @@ export default function HomePage() {
           <a
             href="https://www.instagram.com/go_.fresh/"
             aria-label="Instagram"
-            className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
+            className="text-primary-darker hover:text-secondary-darker dark:hover:text-secondary transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaInstagram className="text-4xl" />
           </a>
           <a
             href="https://wa.me/+972509133588"
             aria-label="WhatsApp"
-            className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
+            className="text-primary-darker hover:text-secondary-darker dark:hover:text-secondary transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaWhatsapp className="text-4xl" />
           </a>
           <a
             href="https://www.tiktok.com/@go_.fresh?_t=8fuXgil4SgR&_r=1"
             aria-label="TikTok"
-            className="text-primary-darker hover:text-secondary-darker transition-transform transform hover:-translate-y-1 duration-300"
+            className="text-primary-darker hover:text-secondary-darker dark:hover:text-secondary transition-transform transform hover:-translate-y-1 duration-300"
           >
             <FaTiktok className="text-4xl" />
           </a>
@@ -159,8 +158,8 @@ export default function HomePage() {
     return (
       <section className="bg-primary text-white text-center py-16">
         <div className="flex flex-col items-center">
-          <SiGooglestreetview size={72} className="mb-4" />
-          <h2 className="text-3xl font-semibold mb-4">מצא אותנו במפות Google</h2>
+          <SiGooglestreetview size={72} className="mb-4 text-stone-100 dark:text-stone-300 hover:text-stone-200 dark:hover:text-stone-100 cursor-pointer" />
+          <h2 className="text-3xl font-semibold mb-4 dark:text-stone-300">מצא אותנו במפות Google</h2>
           <a
             href="https://www.google.com/maps/dir//go+fresh+kisra/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x151c31409e25b987:0xf9746a82b21177a5?sa=X&ved=1t:3061&ictx=111"
             className="inline-block"

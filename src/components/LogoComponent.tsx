@@ -15,7 +15,7 @@ export default function LogoComponent() {
           <img src={shape} alt="shape" className="w-8 h-8 mx-[0.05rem]" />{" "}
           <span>Go</span>
         </div>
-        <p className="text-sm font-bold  text-secondary-darker justify-self-start">
+        <p className="text-sm font-bold  text-secondary dark:text-secondary-lighter justify-self-start">
           Be Your Self
         </p>
       </div>

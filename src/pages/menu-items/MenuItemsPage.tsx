@@ -12,10 +12,7 @@ import { clearPersistedState } from "@/app/redux/features/general/generalSlice";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import MenuItemsComponent from "@/components/MenuItemComponent";
 import useIsToday from "@/app/hooks/useIsToday";
-import {
-  isTablet,
-  useMobileOrientation,
-} from "react-device-detect";
+import { isTablet, useMobileOrientation } from "react-device-detect";
 
 const MenuItemsPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -43,13 +40,12 @@ const MenuItemsPage: React.FC = () => {
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchMenuItemsAsync());
-    }
-    // Initialize the activeCategory once the items are loaded
-    else if (
+    } else if (
       status === "succeeded" &&
       activeCategory === "" &&
       menuItems.length > 0
     ) {
+      // Initialize the activeCategory once the items are loaded
       setActiveCategory(menuItems[0].category.name);
     }
   }, [status, dispatch, menuItems, activeCategory]);
@@ -93,16 +89,16 @@ const MenuItemsPage: React.FC = () => {
 
   return (
     <div className="flex flex-wrap">
-      <div className="w-full md:w-1/4 md:bg-stone-200 md:dark:bg-stone-800 md:bg-opacity-50">
+      <div className="w-full md:w-1/4 md:bg-gray-100 dark:md:bg-gray-100-dark md:bg-opacity-50">
         <nav className="flex flex-col sticky top-0 md:min-h-[94.2vh]">
           {categories.map((category) => (
             <button
               key={category}
               className={clsx(
                 "p-2",
-                { "bg-accent-400 text-white": activeCategory === category },
+                { "bg-primary text-white": activeCategory === category },
                 {
-                  "text-accent-400 hover:bg-secondary-lighter hover:text-white bg-stone-200 dark:bg-stone-700 bg-opacity-50 dark:text-stone-6":
+                  "text-primary hover:bg-secondary hover:text-white bg-gray-100 dark:bg-gray-100-dark bg-opacity-50 dark:text-stone-400":
                     activeCategory !== category,
                 }
               )}
@@ -114,12 +110,15 @@ const MenuItemsPage: React.FC = () => {
         </nav>
       </div>
       <div className="w-full md:w-3/4">
-        <div className={clsx(
-          "grid grid-cols-1  gap-6 md:gap-4 p-4",
-          isTablet && !isLandscape && "grid-cols-2",
-          isTablet && isLandscape && "grid-cols-3",
-          !isTablet && "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-        )}>
+        <div
+          className={clsx(
+            "grid grid-cols-1 gap-6 md:gap-4 p-4",
+            isTablet && !isLandscape && "grid-cols-2",
+            isTablet && isLandscape && "grid-cols-3",
+            !isTablet &&
+              "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+          )}
+        >
           {activeMenuItems.map((item) => (
             <MenuItemsComponent key={`${item._id}-menu-item`} item={item} />
           ))}
