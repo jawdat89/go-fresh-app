@@ -34,6 +34,11 @@
     "tailwind.config.ts",
     "src/**/*", 
   ],
-  "exclude": ["node_modules", "dist", "vite.config.ts"],
+  "exclude": [
+    "node_modules", 
+    "dist", 
+    "vite.config.ts",
+    "src/**/*.test.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
