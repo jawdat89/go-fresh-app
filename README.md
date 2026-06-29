@@ -23,7 +23,7 @@ To run this project locally:
 
 ## Copyright
 
-Copyright © 2024 Jawdat Abdullah. All rights reserved.
+Copyright © 2024 jawdat89. All rights reserved.
 
 ## License
 
