@@ -82,7 +82,7 @@ export default function HomePage() {
           <ContentItem
             title="מקור האנרגיה הטבעי שלך"
             description="לחוות את האנרגיה המתוקה של הטבע"
-            emoji="🍏🍊🍋🍌🍓🫐🥝"
+            emoji="🍏🍊🍋🍌🍓🥝"
           />
           <ContentItem
             title="פתוח כל ימי השבוע"
